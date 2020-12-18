@@ -3,32 +3,32 @@
   <div class="footer">
     <ul class="nav">
       <li>
-        <a href="javascript:;" class="active">
+        <a href="javascript:;" @click="goto('/')" :class="{active: isCurrent('/')}">
           <p class="iconfont icon-account p1"></p>
-          <p class="p2">家</p>
+          <p class="p2 font-no-rem" >家</p>
         </a>
       </li>
       <li>
-        <a href="javascript:;">
+        <a href="javascript:;" @click="goto('/square')" :class="{active: isCurrent('/square')}">
           <p class="iconfont icon-messagecenter p1"></p>
-          <p class="p2">广场</p>
+          <p class="p2 font-no-rem" >广场</p>
         </a>
       </li>
       <li>
-        <a href="javascript:;">
+        <a href="javascript:;" @click="goto('/publish')" :class="{active: isCurrent('/publish')}">
           <p class="iconfont icon-add-select p3"></p>
         </a>
       </li>
       <li>
-        <a href="javascript:;">
+        <a href="javascript:;" @click="goto('/message')" :class="{active: isCurrent('/message')}">
           <p class="iconfont icon-atm p1"></p>
-          <p class="p2">消息</p>
+          <p class="p2 font-no-rem">消息</p>
         </a>
       </li>
       <li>
-        <a href="javascript:;">
+        <a href="javascript:;" @click="goto('/profile')" :class="{active: isCurrent('/profile')}">
           <p class="iconfont icon-account p1"></p>
-          <p class="p2">我</p>
+          <p class="p2 font-no-rem">我</p>
         </a>
       </li>
     </ul>
@@ -37,7 +37,15 @@
 
 <script>
   export default {
-    name: 'Footer'
+    name: 'Footer',
+    methods: {
+      goto(path) {
+        path !== this.$route.path && this.$router.replace(path)
+      },
+      isCurrent(path) {
+        return this.$route.path === path
+      }
+    }
   }
 </script>
 

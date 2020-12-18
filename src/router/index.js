@@ -5,6 +5,7 @@ import Square from '../pages/Square/Square'
 import Publish from '../pages/Publish/Publish'
 import Message from '../pages/Message/Message'
 import Profile from '../pages/Profile/Profile'
+import Search from '../pages/Search/Search'
 
 Vue.use(Router)
 
@@ -13,27 +14,47 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: {
+        showFooter: true
+      }
     },
     {
       path: '/Square',
       name: 'Square',
-      component: Square
+      component: Square,
+      meta: {
+        showFooter: true
+      }
     },
     {
       path: '/Publish',
       name: 'Publish',
-      component: Publish
+      component: Publish,
+      meta: {
+        showFooter: true
+      }
     },
     {
       path: '/Message',
       name: 'Message',
-      component: Message
+      component: Message,
+      meta: {
+        showFooter: true
+      }
     },
     {
       path: '/Profile',
       name: 'Profile',
-      component: Profile
+      component: Profile,
+      meta: {
+        showFooter: true
+      }
+    },
+    {
+      path: '/Search',
+      name: 'Search',
+      component: Search
     }
   ]
 })

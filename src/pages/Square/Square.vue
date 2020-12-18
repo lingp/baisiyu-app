@@ -1,12 +1,15 @@
 <template>
-  <div class="square">
+  <div class='square'>
+    <Header />
     Square
   </div>
 </template>
 
 <script>
+  import Header from '../../components/Header/Header'
   export default {
-    name: 'Square'
+    name: 'Square',
+    components: {Header}
   }
 </script>
 

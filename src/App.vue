@@ -1,8 +1,7 @@
 <template>
   <div id='app'>
-    <Header />
     <router-view></router-view>
-    <Footer />
+    <Footer v-show="$route.meta.showFooter"></Footer>
   </div>
 </template>
 
@@ -23,11 +22,15 @@
     height: 100%;
     overflow: hidden;
   }
-  #app {
+  .font-no-rem {
     font-size: 16px;
+  }
+  #app {
+    font-size: 50px; // TODO
     height: 100%;
     overflow: hidden;
     background-color: #EEEEEE;
     position: relative;
   }
+
 </style>

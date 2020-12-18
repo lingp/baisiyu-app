@@ -1,12 +1,15 @@
 <template>
-  <div class="profile">
+  <div class='profile'>
+    <Header />
     Profile
   </div>
 </template>
 
 <script>
+  import Header from '../../components/Header/Header'
   export default {
-    name: 'Profile'
+    name: 'Profile',
+    components: {Header}
   }
 </script>
 

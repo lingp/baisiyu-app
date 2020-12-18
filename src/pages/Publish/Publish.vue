@@ -1,12 +1,15 @@
 <template>
-  <div class="publish">
+  <div class='publish'>
+    <Header />
     Publish
   </div>
 </template>
 
 <script>
+  import Header from '../../components/Header/Header'
   export default {
-    name: 'Profile'
+    name: 'Profile',
+    components: {Header}
   }
 </script>
 

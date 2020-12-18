@@ -1,10 +1,12 @@
 <template>
   <!--  头部  -->
   <div class="header">
-    <div class="search-div">
-      <i class="iconfont icon-sousuo iconfont-size"></i>
-      <span>搜索</span>
-    </div>
+    <slot name="home"></slot>
+    <slot name="message"></slot>
+    <slot name="profile"></slot>
+    <slot name="publish"></slot>
+    <slot name="search"></slot>
+    <slot name="square"></slot>
   </div>
 </template>
 
@@ -24,17 +26,5 @@
     left: 0;
     padding: 10px 20px 10px 20px;
     box-sizing: border-box;
-    .search-div {
-      box-sizing: border-box;
-      height: 100px;
-      line-height: 100px;
-      background-color: #5aadff;
-      text-align: center;
-      border-radius: 180px;
-      color: #EEEEEE;
-      .iconfont-size {
-        font-size: 16px;
-      }
-    }
   }
 </style>
