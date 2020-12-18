@@ -8,7 +8,11 @@
         </div>
       </router-link>
     </Header>
-    Home
+    <div class="content">
+      <div class="nav">
+        <cube-scroll-nav-bar :current="current" :labels="labels" :txts="txts" @change="changeHandler" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,7 +21,30 @@
 
   export default {
     name: 'Home',
-    components: {Header}
+    components: {Header},
+    data() {
+      return {
+        current: '快车',
+        labels: [
+          'recommend',
+          'stars',
+          'topic',
+          'no_sorrow'
+        ],
+        txts: [
+          '推荐',
+          '星圈',
+          '话题',
+          '解忧'
+        ]
+      }
+    },
+    methods: {
+      changeHandler(cur) {
+        this.current = cur
+        // this.$router.replace('/search')
+      }
+    }
   }
 </script>
 
@@ -38,5 +65,9 @@
     .search-text-color {
       color: #EEEEEE;
     }
+  }
+  .cube-scroll-nav-bar-item {
+    padding-left: 90px!important;
+    padding-right: 90px!important;
   }
 </style>
