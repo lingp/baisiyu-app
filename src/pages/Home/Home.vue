@@ -1,7 +1,7 @@
 <template>
   <div class='home'>
     <Header>
-      <router-link to="/search"  slot='home' class="search-text-color">
+      <router-link to="/search" slot='home' class="search-text-color">
         <div class="search-div">
           <i class='iconfont icon-sousuo font-no-rem'></i>
           <span class='font-no-rem'>搜索</span>
@@ -10,7 +10,29 @@
     </Header>
     <div class="content">
       <div class="nav">
-        <cube-scroll-nav-bar :current="current" :labels="labels" :txts="txts" @change="changeHandler" />
+        <cube-scroll-nav-bar :current="current" :labels="labels" :txts="txts" @change="changeHandler"/>
+      </div>
+      <div class="list">
+        <ul>
+          <li class="item">
+            <div class="item-head">
+              <div class="item-left">
+                <span class="portrait">
+                   <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=246513285,2824505510&fm=26&gp=0.jpg" />
+                </span>
+                <span class="nick">
+                  昵称
+                </span>
+              </div>
+              <div class="item-right">
+                <i class="cubeic-close"></i>
+              </div>
+            </div>
+            <div class="item-content">
+              content1
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -66,8 +88,51 @@
       color: #EEEEEE;
     }
   }
+
   .cube-scroll-nav-bar-item {
-    padding-left: 90px!important;
-    padding-right: 90px!important;
+    padding-left: 90px !important;
+    padding-right: 90px !important;
+  }
+
+  .list {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    ul {
+      height: 100%;
+      .item {
+        background-color: #EEEEEE;
+        width: 100%;
+        height: 50%;
+        display: inline-block;
+        .item-head {
+          position: relative;
+          span {
+            vertical-align:top; // 将span元素与行中最高的元素平齐。
+          }
+          .item-left {
+            float: left;
+            .portrait {
+              height: 100px;
+              line-height: 100px;
+              display: inline-block;
+              img {
+                height: 100px;
+                width: 100px;
+                line-height: 100px;
+              }
+            }
+            .nick {
+              height: 100px;
+              display: inline-block;
+              line-height: 100px;
+            }
+          }
+          .item-right {
+            float: right;
+          }
+        }
+      }
+    }
   }
 </style>
