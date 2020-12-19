@@ -50,13 +50,16 @@
 </script>
 
 <style lang='less' rel='stylesheet/less'>
+  @import "../../common/less/1-px";
   .footer {
+    .1-px(top, #cccccc);
     position: absolute;
     width: 100%;
     height: 180px;
     background-color: #ffffff;
     bottom: 0;
     left: 0;
+    box-sizing: border-box;
     .nav {
       width: 100%;
       overflow: hidden;
