@@ -40,7 +40,7 @@
 
     .content {
       position: absolute;
-      top: 120px;
+      top: 125px;
       bottom: 0;
       left: 0;
       right: 0;

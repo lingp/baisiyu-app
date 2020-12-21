@@ -26,5 +26,6 @@
     left: 0;
     padding: 10px 20px 10px 20px;
     box-sizing: border-box;
+    z-index: 1;
   }
 </style>

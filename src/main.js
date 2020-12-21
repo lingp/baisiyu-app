@@ -53,6 +53,7 @@ import {
 import App from './App'
 import router from './router'
 import './libs/rem.js'
+import VueTouch from 'vue-touch'
 
 Vue.use(Button)
 Vue.use(Loading)
@@ -92,8 +93,12 @@ Vue.use(Sticky)
 Vue.use(ScrollNav)
 Vue.use(ScrollNavBar)
 Vue.use(RecycleList)
+Vue.use(VueTouch, {name: 'v-touch'})
 
 Vue.config.productionTip = false
+VueTouch.config.swipe = {
+  threshold: 50  // 设置左右滑动的距离
+}
 
 /* eslint-disable no-new */
 new Vue({

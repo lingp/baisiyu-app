@@ -6,6 +6,7 @@ import Publish from '../pages/Publish/Publish'
 import Message from '../pages/Message/Message'
 import Profile from '../pages/Profile/Profile'
 import Search from '../pages/Search/Search'
+import Test from '../pages/Test/Test'
 
 Vue.use(Router)
 
@@ -55,6 +56,11 @@ export default new Router({
       path: '/Search',
       name: 'Search',
       component: Search
+    },
+    {
+      path: '/Test',
+      name: 'Test',
+      component: Test
     }
   ]
 })
