@@ -35,7 +35,7 @@
     font-size: 50px; // TODO
     height: 100%;
     overflow: hidden;
-    background-color: #FFFFFF;
+    background-color: #F5F7F9;
     position: relative;
 
     .content {

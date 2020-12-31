@@ -7,6 +7,7 @@ import Message from '../pages/Message/Message'
 import Profile from '../pages/Profile/Profile'
 import Search from '../pages/Search/Search'
 import Test from '../pages/Test/Test'
+import Login from '../pages/Login/Login'
 
 Vue.use(Router)
 
@@ -56,6 +57,11 @@ export default new Router({
       path: '/Search',
       name: 'Search',
       component: Search
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/Test',
