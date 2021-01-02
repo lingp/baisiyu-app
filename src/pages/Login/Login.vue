@@ -6,27 +6,70 @@
     <div class="login-form-content">
       <div>
         <label class="login-form-label"></label>
-        <input type="text" name="username" placeholder="用户名" />
+        <input type="text" name="username" placeholder="手机号" v-model="username" />
       </div>
       <div>
         <label class="login-form-label"></label>
-        <input type="text" name="password" placeholder="密码" />
+        <input type="text" name="password" placeholder="密码" v-model="password"/>
       </div>
       <div>
         <label class="login-form-label"></label>
-        <input type="text" name="password" placeholder="验证码" />
+        <input type="text" name="captcha" placeholder="验证码" v-model="captcha" />
       </div>
     </div>
     <div class="login-form-footer">
-      <input type="submit" name="登录" />
+      <input type="submit" name="登录" v-on:click="login" />
     </div>
 
   </div>
 </template>
 
 <script>
+  import {loginByUsernamePwd} from '../../apis'
+
   export default {
-    name: 'Login'
+    name: 'Login',
+    data() {
+      return {
+        username: '',
+        password: '',
+        captcha: ''
+      }
+    },
+    computed: {
+      rightPhone() {
+        return /^1\d{10}$/.test(this.username)
+      }
+    },
+    mounted() {
+      this.username = ''
+      this.password = ''
+      this.captcha = ''
+    },
+    methods: {
+      async login() {
+        if (!this.username || !this.rightPhone) {
+          this.toToast('手机号不能为空(暂时只支持手机号注册和登录)')
+          return
+        } else if (!this.password) {
+          this.toToast('密码不能为空')
+          return
+        } else if (!this.captcha) {
+          this.toToast('验证码不能为空')
+          return
+        }
+        // 用户名/密码登录
+        const result = await loginByUsernamePwd(this.username, this.password, this.captcha)
+        console.log(result)
+      },
+      toToast(text) {
+        const toast = this.$createToast({
+          time: 1000,
+          txt: text
+        })
+        toast.show()
+      }
+    }
   }
 </script>
 

@@ -4,6 +4,7 @@ import Vue from 'vue'
 // By default we import all the components.
 // Only reserve the components on demand and remove the rest.
 // Style is always required.
+import store from './store'
 import {
   /* eslint-disable no-unused-vars */
   Style,
@@ -105,5 +106,6 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: {App}
+  components: {App},
+  store
 })

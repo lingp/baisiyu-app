@@ -5,13 +5,13 @@ export default function ajax(url = '', data = {}, type = 'GET') {
     let promise
 
     if (type === 'GET') {
-      let queryStr = '';
+      let queryStr = ''
       Object.keys(data).forEach(key => {
         queryStr += key + '=' + data[key] + '&'
       })
       if (queryStr !== '') {
         queryStr = queryStr.substring(0, queryStr.lastIndexOf('&'))
-        url = url + '?' + queryStr;
+        url = url + '?' + queryStr
       }
       promise = axios.get(url)
     } else {
