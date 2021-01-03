@@ -11,3 +11,5 @@ export const loginByUsernamePwd = (username, password, captcha) => ajax('/api/v1
 }, 'POST')
 
 export const logout = () => {}
+
+export const getCaptcha = () => ajax('/api/v1/login/captcha')

@@ -10,11 +10,13 @@
       </div>
       <div>
         <label class="login-form-label"></label>
-        <input type="text" name="password" placeholder="密码" v-model="password"/>
+        <input type="password" name="password" placeholder="密码" v-model="password"/>
       </div>
       <div>
         <label class="login-form-label"></label>
         <input type="text" name="captcha" placeholder="验证码" v-model="captcha" />
+        <img class="get_verification" alt="captcha"
+             @click="getCaptcha" ref="captcha">
       </div>
     </div>
     <div class="login-form-footer">
@@ -25,7 +27,10 @@
 </template>
 
 <script>
-  import {loginByUsernamePwd} from '../../apis'
+  import {getCaptcha, loginByUsernamePwd} from '../../apis'
+  import {getCookie, setCookie} from '../../utils/utils'
+  import {USER_INFO_COOKIE, TOKEN_COOKIE} from '../../constants/cookie-name'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'Login',
@@ -39,17 +44,27 @@
     computed: {
       rightPhone() {
         return /^1\d{10}$/.test(this.username)
-      }
+      },
+      ...mapState([
+        'userInfo'
+      ]),
     },
     mounted() {
       this.username = ''
       this.password = ''
       this.captcha = ''
+
+      let token = getCookie(TOKEN_COOKIE)
+      if (token) {
+        // this.$router.replace('/')
+      }
+
+      this.getCaptcha()
     },
     methods: {
       async login() {
         if (!this.username || !this.rightPhone) {
-          this.toToast('手机号不能为空(暂时只支持手机号注册和登录)')
+          this.toToast('手机号不能为空或格式不正确(暂时只支持手机号注册和登录)')
           return
         } else if (!this.password) {
           this.toToast('密码不能为空')
@@ -58,9 +73,23 @@
           this.toToast('验证码不能为空')
           return
         }
+
         // 用户名/密码登录
         const result = await loginByUsernamePwd(this.username, this.password, this.captcha)
-        console.log(result)
+        if (result.code === 0) {
+          this.toToast('登录成功')
+          const userInfo = result.data.user
+          const token = result.data.token
+          // 记录用户信息
+          this.$store.dispatch('recordUserInfo', userInfo)
+          setCookie(USER_INFO_COOKIE, userInfo)
+          setCookie(TOKEN_COOKIE, token)
+
+          // 返回上一页
+          this.$router.back()
+        } else {
+          this.toToast(result.errMsg)
+        }
       },
       toToast(text) {
         const toast = this.$createToast({
@@ -68,6 +97,11 @@
           txt: text
         })
         toast.show()
+      },
+      // 获取一个新的图片验证码
+      getCaptcha () {
+        // 每次指定的src要不一样
+        this.$refs.captcha.src = 'http://localhost:9001/api/v1/login/captcha?time=' + Date.now()
       }
     }
   }
