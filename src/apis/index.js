@@ -13,3 +13,8 @@ export const loginByUsernamePwd = (username, password, captcha) => ajax('/api/v1
 export const logout = () => {}
 
 export const getCaptcha = () => ajax('/api/v1/login/captcha')
+
+// 文章加载
+export const loadArticle = (channelId) => ajax('/api/v1/article/load', {
+  'channel_id': channelId
+}, 'GET')

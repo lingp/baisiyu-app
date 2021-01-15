@@ -19,15 +19,14 @@
             class="home-list-scroll"
           >
             <ul>
-              <li class="item">
+              <li class="item" v-for="item in articles">
                 <div class="item-head clearfix">
                   <div class="item-left">
                   <span class="portrait">
-                     <img
-                       src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=246513285,2824505510&fm=26&gp=0.jpg"/>
+                     <img :src="item.author_portrait_img"/>
                   </span>
                     <span class="nick">
-                    一切皆在不言中
+                    {{item.author_name}}
                   </span>
                   </div>
                   <div class="item-right">
@@ -35,12 +34,7 @@
                   </div>
                 </div>
                 <div class="item-content">
-                  1 一等人是官倒，出了事情有人保；二等人是官倒，游山玩水享清福；三等人搞承包，吃喝嫖赌全报销；
-                  四等人干租赁，坑蒙拐骗带小姘；五等人是老板，买空卖空成老板；六等人是明星，挣的票子数不清；
-                  七等人是路霸，缺钱花了把车卡；八等人是律师，发财全靠打官司；九等人大盖帽，吃了原告吃被告；
-                  十等人是演员，扭扭屁股也赚钱；十一等人是工商，罚了款子兜里装；十二等人是画家，画完螃蟹画大虾；
-                  十三等人手术刀，割了肚子要红包；十四等人方向盘，上班下班都赚钱；十五等人搞个体，赚多赚少归自己；
-                  十六等人干宣传，隔三差五能解馋；十七等人是教员，山珍海味认不全；十八等人老百姓，学习雷锋干革命。
+                  {{item.content}}
                 </div>
                 <div class="item-footer"></div>
               </li>
@@ -144,6 +138,9 @@
                 </div>
                 <div class="item-footer"></div>
               </li>
+
+
+
             </ul>
           </cube-scroll>
         </v-touch>
@@ -154,6 +151,7 @@
 
 <script>
   import Header from '../../components/Header/Header'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'Home',
@@ -188,6 +186,10 @@
       swiperright: function () { // 右滑切换到detail页
         alert('向右移动')
         // this.$router.push({'path': '/message'})
+      },
+      loadArticle: function () { // 加载文章
+        let channelId = ''
+        this.$store.dispatch('loadArticle', channelId)
       }
     },
     created() {
@@ -197,6 +199,11 @@
       const bodyheight = document.documentElement.clientHeight
       // 剪掉底部导航的高度
       homeListScroll.style.height = bodyheight - 160 + 'px'
+
+      this.loadArticle()
+    },
+    computed: {
+      ...mapState(['articles'])
     }
   }
 </script>

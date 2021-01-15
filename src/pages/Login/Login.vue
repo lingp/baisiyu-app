@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import {getCaptcha, loginByUsernamePwd} from '../../apis'
+  import {loginByUsernamePwd} from '../../apis'
   import {getCookie, setCookie} from '../../utils/utils'
   import {USER_INFO_COOKIE, TOKEN_COOKIE} from '../../constants/cookie-name'
   import {mapState} from 'vuex'
@@ -47,7 +47,7 @@
       },
       ...mapState([
         'userInfo'
-      ]),
+      ])
     },
     mounted() {
       this.username = ''

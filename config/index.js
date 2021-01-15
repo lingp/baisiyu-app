@@ -14,6 +14,10 @@ module.exports = {
       '/api/v1/login': {
         target: 'http://localhost:9001',
         changeOrigin: true
+      },
+      '/api/v1/article': {
+        target: 'http://localhost:9003',
+        changeOrigin: true
       }
     },
 
