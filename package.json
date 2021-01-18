@@ -2,7 +2,7 @@
   "name": "baisiyu-app",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "lingp <carl.lin@huolala.cn>",
+  "author": "lingp",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 0.0.0.0",
