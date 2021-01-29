@@ -18,3 +18,13 @@ export const getCaptcha = () => ajax('/api/v1/login/captcha')
 export const loadArticle = (channelId) => ajax('/api/v1/article/load', {
   'channel_id': channelId
 }, 'POST')
+
+// 文章加载更多
+export const loadArticleMore = (channelId) => ajax('/api/v1/article/load_more', {
+  'channel_id': channelId
+}, 'POST')
+
+// 文章加载更多
+export const loadArticleNew = (channelId) => ajax('/api/v1/article/load_new', {
+  'channel_id': channelId
+}, 'POST')

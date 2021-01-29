@@ -16,6 +16,7 @@
         <v-touch v-on:swipeleft="swiperleft"  v-on:swiperight="swiperright" class="wrapper">
           <cube-scroll
             ref="scroll"
+            :data="articles"
             class="home-list-scroll"
             :options="options"
             @pulling-down="onPullingDown"
@@ -37,7 +38,7 @@
                   </div>
                 </div>
                 <div class="item-content">
-                  {{item.content}}
+                  <p v-html='item.content'></p>
                   <div class="item-content-footer clearfix">
                     <div class="item-content-footer-area">
                       <i class="iconfont icon-like"></i>
@@ -117,11 +118,11 @@
         pullDownRefresh: true,
         pullDownRefreshThreshold: 60,
         pullDownRefreshStop: 40,
-        pullDownRefreshTxt: 'Refresh success',
+        pullDownRefreshTxt: '加载最新',
         pullUpLoad: true,
         pullUpLoadThreshold: 0,
-        pullUpLoadMoreTxt: 'Load more',
-        pullUpLoadNoMoreTxt: 'No more data',
+        pullUpLoadMoreTxt: '加载更多',
+        pullUpLoadNoMoreTxt: '没有更多数据鸟',
         customPullDown: false
       }
     },
@@ -173,21 +174,61 @@
         }
         // this.$router.push({'path': '/message'})
       },
-      onPullingDown: function () {
-        alert('pull-down')
-        // 模拟更新数据
-        setTimeout(() => {
-          if (Math.random() > 0.5) {
-            alert('pull-down')
-          } else {
-            // 如果没有新数据
-            this.$refs.scroll.forceUpdate()
-          }
-        }, 1000)
+      async onPullingDown () {
+        // 加载文章列表
+        let channelId = ''
+        switch (this.current) {
+          case 'recommend':
+            channelId = 1
+            break
+          case 'stars':
+            channelId = 2
+            break
+          case 'topic':
+            channelId = 3
+            break
+          case 'no_sorrow':
+            channelId = 4
+            break
+        }
+        let orginLen = this.articles.length
+        console.log('loadArticleNew', this.articles)
+        let originArticles = {...this.articles}
+        console.log('originArticles', originArticles)
+
+        await this.$store.dispatch('loadArticleNew', {channelId, originArticles})
+
+        let refreshLen = this.articles.length
+        if (orginLen === refreshLen) {
+          this.$refs.scroll.forceUpdate()
+        }
       },
-      onPullingUp: function () {
-        alert('pull-up')
-        this.$refs.scroll.forceUpdate()
+      async onPullingUp() {
+        // 加载文章列表
+        let channelId = ''
+        switch (this.current) {
+          case 'recommend':
+            channelId = 1
+            break
+          case 'stars':
+            channelId = 2
+            break
+          case 'topic':
+            channelId = 3
+            break
+          case 'no_sorrow':
+            channelId = 4
+            break
+        }
+        let orginLen = this.articles.length
+        let originArticles = {...this.articles}
+        await this.$store.dispatch('loadArticleMore', {channelId, originArticles})
+
+        let refreshLen = this.articles.length
+
+        if (orginLen === refreshLen) {
+          this.$refs.scroll.forceUpdate()
+        }
       },
       loadArticle: function () { // 加载文章
         // 加载文章列表
@@ -355,6 +396,11 @@
           margin-left: 40px;
           /*white-space:normal;*/
           box-sizing: border-box;
+          p {
+            text-align: justify; /*实现两端对齐*/
+            /*text-justify: newspaper; !*通过增加或减少字或字母之间的空格对齐文本*!*/
+            word-break: break-all; /*允许在单词内换行*/
+          }
 
           .item-content-footer {
             margin-top: 20px;
